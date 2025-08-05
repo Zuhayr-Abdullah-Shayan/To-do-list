@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <style>
+        body{
+            background-color: rgba(38, 94, 224, 0.553);
+            text-align: center;
+        }
+        div{
+            background-color: white;
+            height: 600px;
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 5px dashed black;
+            border-radius: 10px;
+        }
+        input{
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px dashed black;
+        }
+        input:focus{
+            outline: none;
+        }
+        button{
+            background-color: rgb(113, 179, 236);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: rgb(5, 141, 245);
+        }
+        ul{
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <h1>To do list</h1>
+    <input type="text" placeholder="Enter task">
+    <button onclick="addTask()">Add task</button>
+    <ul></ul>
+    </div>
+    <script>
+        let task=document.querySelector('input')
+        let list=document.querySelector('ul')
+        let taskArr=[]
+        function addTask(){
+            taskArr.push(task.value)
+            console.log(taskArr)
+            addToDo()
+        }
+        function addToDo(){
+            list.innerHTML=''
+            taskArr.map((item)=>{
+                list.innerHTML+=`<li>${item}<button class="deletebtn">Remove</button></li>`
+                task.value=''
+                let remove=document.querySelectorAll('.deletebtn')
+                let removeArr=Array.from(remove)
+                removeArr.map((item, index)=>{
+                item.addEventListener('click', function(){
+                    taskArr.splice(index, 1)
+                    addToDo()
+                })
+            })
+        })
+    }
+    </script>
+</body>
+</html>
